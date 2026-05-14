@@ -1,0 +1,7 @@
+#conda activation for barcode splitting
+
+conda activate WDX
+
+#merge all pod5 file for barcode splitting
+pod5 merge /home/rnagenomics/data_storage/260512_drs_siribo/20260505_1656_P2I-00176-B_PBK56037_a1a8ffe5/pod5/*.pod5 -o ./merged.pod5
+
