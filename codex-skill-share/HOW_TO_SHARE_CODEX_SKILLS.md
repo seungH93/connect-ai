@@ -47,7 +47,7 @@ git push
 
 ```powershell
 git pull
-powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1
+powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1 -ConflictAction AppendUnique
 git add codex-skill-share
 git commit -m "Merge Codex skills from this computer"
 git push
@@ -57,7 +57,8 @@ merge 규칙:
 
 - 같은 파일이고 내용도 같으면 건너뜁니다.
 - 공유 폴더에 없는 파일이면 추가합니다.
-- 같은 경로인데 내용이 다르면 덮어쓰지 않고 `codex-skill-share/conflicts/`에 따로 저장합니다.
+- 같은 경로의 텍스트 파일이 다르면 기존 파일 아래에 없는 줄만 추가합니다.
+- 바이너리나 애매한 파일은 덮어쓰지 않고 `codex-skill-share/conflicts/`에 따로 저장합니다.
 
 ## 공유하는 것
 

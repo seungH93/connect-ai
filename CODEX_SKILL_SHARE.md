@@ -40,10 +40,10 @@ git push
 
 ```powershell
 git pull
-powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1
+powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1 -ConflictAction AppendUnique
 git add codex-skill-share
 git commit -m "Merge Codex skills from this computer"
 git push
 ```
 
-같은 파일은 그대로 두고, 새 파일만 추가합니다. 내용이 다른 같은 파일은 `codex-skill-share/conflicts/`에 따로 저장합니다.
+같은 파일은 그대로 두고, 새 파일만 추가합니다. 내용이 다른 텍스트 파일은 기존 파일 아래에 없는 줄만 추가합니다.

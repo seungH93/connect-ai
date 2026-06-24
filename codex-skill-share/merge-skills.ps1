@@ -1,6 +1,8 @@
 param(
   [string]$Source = "$env:USERPROFILE\.codex\skills",
-  [string]$Name = $env:COMPUTERNAME
+  [string]$Name = $env:COMPUTERNAME,
+  [ValidateSet("Conflict", "AppendUnique")]
+  [string]$ConflictAction = "Conflict"
 )
 
 $ErrorActionPreference = "Stop"
@@ -21,6 +23,8 @@ New-Item -ItemType Directory -Force -Path $Dest | Out-Null
 $copied = 0
 $skipped = 0
 $conflicted = 0
+$appended = 0
+$textExtensions = @(".md", ".txt", ".yaml", ".yml", ".json", ".toml", ".ps1")
 
 Get-ChildItem -LiteralPath $Source -Recurse -File |
   Where-Object { $_.FullName -notmatch '\\\.system(\\|$)' } |
@@ -43,6 +47,23 @@ Get-ChildItem -LiteralPath $Source -Recurse -File |
       return
     }
 
+    if ($ConflictAction -eq "AppendUnique" -and $textExtensions -contains $_.Extension.ToLowerInvariant()) {
+      $sourceLines = Get-Content -LiteralPath $_.FullName
+      $targetLines = Get-Content -LiteralPath $target
+      $newLines = $sourceLines | Where-Object { $targetLines -notcontains $_ }
+
+      if ($newLines.Count -eq 0) {
+        $script:skipped++
+        return
+      }
+
+      Add-Content -LiteralPath $target -Value ""
+      Add-Content -LiteralPath $target -Value "# merge-skills: unique lines from $Name ($relative)"
+      Add-Content -LiteralPath $target -Value $newLines
+      $script:appended++
+      return
+    }
+
     $conflict = Join-Path (Join-Path $ConflictRoot $Name) $relative
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $conflict) | Out-Null
     Copy-Item -LiteralPath $_.FullName -Destination $conflict -Force
@@ -50,4 +71,4 @@ Get-ChildItem -LiteralPath $Source -Recurse -File |
   }
 
 Write-Host "Merged skills from $Source"
-Write-Host "Copied: $copied; identical skipped: $skipped; conflicts saved: $conflicted"
+Write-Host "Copied: $copied; identical skipped: $skipped; appended: $appended; conflicts saved: $conflicted"
