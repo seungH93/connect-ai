@@ -13,8 +13,8 @@ Codex 스킬/설정 공유 폴더:
 전체 repo를 다 받지 않고 Codex 공유 폴더만 받습니다.
 
 ```powershell
-git clone --filter=blob:none --sparse https://github.com/seungH93/connect-ai.git codex-shared
-cd codex-shared
+git clone --filter=blob:none --sparse https://github.com/seungH93/connect-ai.git codex-skill-checkout
+cd codex-skill-checkout
 git sparse-checkout set codex-skill-share
 powershell -ExecutionPolicy Bypass -File .\codex-skill-share\install.ps1
 ```

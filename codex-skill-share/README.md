@@ -24,8 +24,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 Install on another Windows computer without cloning the whole repo:
 
 ```powershell
-git clone --filter=blob:none --sparse https://github.com/seungH93/connect-ai.git codex-shared
-cd codex-shared
+git clone --filter=blob:none --sparse https://github.com/seungH93/connect-ai.git codex-skill-checkout
+cd codex-skill-checkout
 git sparse-checkout set codex-skill-share
 powershell -ExecutionPolicy Bypass -File .\codex-skill-share\install.ps1
 ```
