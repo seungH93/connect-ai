@@ -1,0 +1,22 @@
+# Project-local Codex defaults.
+# These settings are safe to keep in Git because they contain no secrets.
+
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[features]
+memories = true
+multi_agent = true
+personality = true
+
+[shell_environment_policy]
+inherit = "core"
+exclude = [
+  "OPENAI_API_KEY",
+  "ANTHROPIC_API_KEY",
+  "GITHUB_TOKEN",
+  "GH_TOKEN",
+  "GOOGLE_API_KEY",
+  "SLACK_BOT_TOKEN"
+]

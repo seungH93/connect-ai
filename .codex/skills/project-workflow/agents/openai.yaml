@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Workflow"
+  short_description: "Use the shared project workflow for this workspace."
+  default_prompt: "Use the project-workflow skill for this task."
