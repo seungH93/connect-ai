@@ -2,6 +2,8 @@
 
 Share this folder between computers with Git, OneDrive, Dropbox, or a zip.
 
+Korean quick guide: [HOW_TO_SHARE_CODEX_SKILLS.md](HOW_TO_SHARE_CODEX_SKILLS.md)
+
 What this includes:
 - `skills/`: personal Codex skills from this computer
 - `config/codex-plugins.toml`: safe plugin config snippet for ponytail
