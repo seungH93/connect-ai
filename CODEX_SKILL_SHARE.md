@@ -33,3 +33,17 @@ git push
 ```
 
 공유하지 않는 것: 로그인 정보, 세션, 로그, sqlite state, plugin cache 전체.
+
+## 여러 컴퓨터 스킬 합치기
+
+각 컴퓨터에서:
+
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1
+git add codex-skill-share
+git commit -m "Merge Codex skills from this computer"
+git push
+```
+
+같은 파일은 그대로 두고, 새 파일만 추가합니다. 내용이 다른 같은 파일은 `codex-skill-share/conflicts/`에 따로 저장합니다.

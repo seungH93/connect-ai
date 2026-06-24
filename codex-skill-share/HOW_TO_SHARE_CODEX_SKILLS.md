@@ -41,6 +41,24 @@ git commit -m "Update shared Codex skills"
 git push
 ```
 
+## 여러 컴퓨터의 스킬을 합칠 때
+
+각 컴퓨터에서 최신 공유 폴더를 받은 다음, 그 컴퓨터의 로컬 Codex 스킬을 merge합니다.
+
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\codex-skill-share\merge-skills.ps1
+git add codex-skill-share
+git commit -m "Merge Codex skills from this computer"
+git push
+```
+
+merge 규칙:
+
+- 같은 파일이고 내용도 같으면 건너뜁니다.
+- 공유 폴더에 없는 파일이면 추가합니다.
+- 같은 경로인데 내용이 다르면 덮어쓰지 않고 `codex-skill-share/conflicts/`에 따로 저장합니다.
+
 ## 공유하는 것
 
 - 개인 Codex 스킬: `codex-skill-share/skills`
